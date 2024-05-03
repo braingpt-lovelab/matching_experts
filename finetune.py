@@ -26,6 +26,8 @@ from torch.utils.data import DataLoader
 
 from transformers import AutoConfig
 
+import wandb
+
 
 
 accelerator = Accelerator()
@@ -93,6 +95,12 @@ def save_checkpoint(LLM, tokenizer, outputdir, epoch):
 
 
 def main(rank, args, world_size):
+    wandb.init(
+        project="brainlessgpt", 
+        entity="kenotron",
+        config=args.__dict__
+    )
+
     ## Setup DDP
     # ddp_setup(rank, world_size, args.master_port)
     print(f"rank: {rank}")
@@ -189,6 +197,7 @@ def main(rank, args, world_size):
                 elasped_time = time.time() - start
                 PPL = math.exp(loss.item() * args.gradient_accumulation_steps)
                 logging(f"Epoch {epoch} | Batch {i}/{trainsize} | PPL: {PPL} | time {elasped_time}", args.logfile)
+                wandb.log({"Epoch": epoch, "Batch": i, "Training PPL": PPL, "Learning Rate": optimizer.param_groups[0]["lr"]})
             
             if args.save_interval > 0 and (i + 1) % args.save_interval == 0:
                 # Evaluate every args.save_interval steps
@@ -201,6 +210,7 @@ def main(rank, args, world_size):
                     if accelerator.is_main_process:
                         val_ppl = math.exp(val_loss)
                         logging(f"Epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
+                        wandb.log({"Epoch": epoch, "Batch": i, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
                         if val_loss < best_val_loss:
                             ckpt_path = os.path.join(args.outputdir, "checkpoint.{}_{}".format(epoch, (i + 1)))
                             logging(f"Save checkpoint to {ckpt_path}", args.logfile)
@@ -216,11 +226,13 @@ def main(rank, args, world_size):
             if accelerator.is_main_process:
                 val_ppl = math.exp(val_loss)
                 logging(f"End of epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
+                wandb.log({"End of epoch": epoch, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
                 if val_loss < best_val_loss:
                     ckpt_path = os.path.join(args.outputdir, "checkpoint.{}".format(epoch))
                     logging(f"Save checkpoint to {ckpt_path}", args.logfile)
                     save_checkpoint(LLM, tokenizer, args.outputdir, f"{epoch}")
         LLM.train()
+    wandb.finish()
 
 
 def evaluate(args, LLM, valid_dataloader, criterion):
