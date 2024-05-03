@@ -22,10 +22,10 @@ from transformers import SchedulerType, AdamW, get_scheduler
 from datasets import load_dataset
 from transformers import DataCollatorForLanguageModeling
 from accelerate import Accelerator
-
-from peft import get_peft_config, get_peft_model, LoraConfig, TaskType
-from peft import PeftConfig, PeftModel
 from torch.utils.data import DataLoader
+
+from transformers import AutoConfig
+
 
 
 accelerator = Accelerator()
@@ -129,11 +129,8 @@ def main(rank, args, world_size):
     )
 
     # Define model
-    LLM = AutoModelForCausalLM.from_pretrained(
-        args.model_path, 
-        torch_dtype=torch.float16, 
-        cache_dir=args.cache_dir
-    )
+    model_config = AutoConfig.from_pretrained(args.model_path)
+    LLM = AutoModelForCausalLM.from_config(model_config)    
     # LLM = LLM.to(device)
     # LLM = DDP(LLM, device_ids=[rank])
 
