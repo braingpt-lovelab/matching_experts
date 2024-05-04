@@ -164,18 +164,27 @@ def main(rank, args, world_size):
             labels = batch["labels"].to(LLM.device)
             shift_logits = LLM(**batch).logits[..., :-1, :].contiguous()
             shift_labels = labels[..., 1:].contiguous()
-            loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-1)
+            loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-1).to(LLM.device)
             loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
 
+            if i >= 592:
+                print("loss", loss)
+                print(f"End of loss computation for batch {i}")
 
             loss = loss / args.gradient_accumulation_steps
             # loss.backward()
             accelerator.backward(loss)
+            if i >= 592:
+                print(f"End of backward for batch {i}")
 
             if (i + 1) % args.gradient_accumulation_steps == 0:
                 optimizer.step()
                 lr_scheduler.step()
                 optimizer.zero_grad()
+
+                if i >= 592:
+                    print(f"End of optimizer step for batch {i}")
+
             if (i + 1) % args.log_interval == 0 and accelerator.is_main_process:
                 elasped_time = time.time() - start
                 PPL = math.exp(loss.item() * args.gradient_accumulation_steps)
