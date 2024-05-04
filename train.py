@@ -8,6 +8,7 @@ import json
 import itertools
 from collections import OrderedDict
 
+import numpy as np
 import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
@@ -135,6 +136,7 @@ def main(rank, args, world_size):
         num_warmup_steps=num_warmup_steps,
         num_training_steps=max_train_steps,
     )
+
     LLM, optimizer, train_dataloader, valid_dataloader, lr_scheduler = accelerator.prepare(
         LLM, optimizer, train_dataloader, valid_dataloader, lr_scheduler)
 
@@ -146,9 +148,20 @@ def main(rank, args, world_size):
         start = time.time()
         optimizer.zero_grad()
         for i, batch in enumerate(train_dataloader):
-            logits = LLM(**batch).logits[:, :-1]
-            labels = batch["labels"][:, 1:]
-            loss = criterion(logits.view(-1, logits.size(-1)), labels.reshape(-1))
+            labels = batch["labels"]
+            # Maunally remove labels to avoid internal loss compute
+            # that does not use ignore_index
+            batch = {
+                "input_ids": batch["input_ids"], 
+                "attention_mask": batch["attention_mask"]
+            }
+            shift_logits = LLM(**batch).logits[..., :-1, :].contiguous()
+            shift_labels = labels[..., 1:].contiguous()
+            loss = criterion(
+                shift_logits.view(-1, shift_logits.size(-1)), 
+                shift_labels.view(-1)
+            )
+
             loss = loss / args.gradient_accumulation_steps
             # loss.backward()
             accelerator.backward(loss)
@@ -157,6 +170,7 @@ def main(rank, args, world_size):
                 optimizer.step()
                 lr_scheduler.step()
                 optimizer.zero_grad()
+
             if (i + 1) % args.log_interval == 0 and accelerator.is_main_process:
                 elasped_time = time.time() - start
                 PPL = math.exp(loss.item() * args.gradient_accumulation_steps)
@@ -174,7 +188,8 @@ def main(rank, args, world_size):
                     if accelerator.is_main_process:
                         val_ppl = math.exp(val_loss)
                         logging(f"Epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
-                        accelerator.log({"Epoch": epoch, "Batch": i, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
+                        accelerator.log({"Epoch": epoch, "Batch": i, "Validation PPL": val_ppl/world_size, "Learning Rate": optimizer.param_groups[0]["lr"]})
+
                         if val_loss < best_val_loss:
                             ckpt_path = os.path.join(args.outputdir, "checkpoint.{}_{}".format(epoch, (i + 1)))
                             logging(f"Save checkpoint to {ckpt_path}", args.logfile)
@@ -191,7 +206,8 @@ def main(rank, args, world_size):
             if accelerator.is_main_process:
                 val_ppl = math.exp(val_loss)
                 logging(f"End of epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
-                accelerator.log({"End of epoch": epoch, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
+                accelerator.log({"End of epoch": epoch, "Validation PPL": val_ppl/world_size, "Learning Rate": optimizer.param_groups[0]["lr"]})
+
                 if val_loss < best_val_loss:
                     ckpt_path = os.path.join(args.outputdir, "checkpoint.{}".format(epoch))
                     logging(f"Save checkpoint to {ckpt_path}", args.logfile)
@@ -204,9 +220,14 @@ def evaluate(args, LLM, valid_dataloader, criterion):
     total_loss = 0.
     for i, batch in enumerate(valid_dataloader):
         with torch.cuda.amp.autocast():
-            logits = LLM(**batch).logits[:, :-1]
-            labels = batch["labels"][:, 1:]
-            loss = criterion(logits.view(-1, logits.size(-1)), labels.reshape(-1))
+            labels = batch["labels"]
+            batch = {
+                "input_ids": batch["input_ids"], 
+                "attention_mask": batch["attention_mask"]
+            }
+            logits = LLM(**batch).logits[..., :-1, :].contiguous()
+            labels = labels[..., 1:].contiguous()
+            loss = criterion(logits.view(-1, logits.size(-1)), labels.view(-1))
             ntokens = (batch["attention_mask"][:, 1:] == 1).sum()
             total_tokens += ntokens
             total_loss += loss * ntokens
