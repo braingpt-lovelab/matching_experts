@@ -1,9 +1,9 @@
 {
     "model_path": "gpt2",
-    "data_path": "BrainGPT/train_valid_split_pmc_neuroscience_2002-2022_filtered_subset_mini",
+    "data_path": "BrainGPT/train_valid_split_pmc_neuroscience_2002-2022_filtered_subset",
     "cache_dir": "cache",
     "batch_size": 1,
-    "chunk_size": 512,
+    "chunk_size": 1024,
     "eval_batch_size": 16,
     "learning_rate": 2e-5,
     "gradient_accumulation_steps": 8,
