@@ -8,6 +8,7 @@ import json
 import itertools
 from collections import OrderedDict
 
+import numpy as np
 import torch
 import torch.distributed as dist
 import torch.multiprocessing as mp
@@ -23,30 +24,7 @@ from datasets import load_dataset
 from transformers import DataCollatorForLanguageModeling
 from accelerate import Accelerator
 from torch.utils.data import DataLoader
-
 from transformers import AutoConfig
-
-import wandb
-
-
-
-accelerator = Accelerator()
-# device = 'cuda' if torch.cuda.is_available() else 'cpu'
-device = accelerator.device
-random.seed(1)
-torch.manual_seed(1)
-
-
-def ddp_setup(rank: int, world_size: int, master_port: str):
-    """
-    Args:
-        rank: Unique identifier of each process
-       world_size: Total number of processes
-    """
-    os.environ["MASTER_ADDR"] = "127.0.0.1"
-    os.environ["MASTER_PORT"] = master_port
-    init_process_group(backend="nccl", rank=rank, world_size=world_size)
-    torch.cuda.set_device(rank)
 
 
 def logging(s, logfile, logging_=True, log_=True):
@@ -95,14 +73,6 @@ def save_checkpoint(LLM, tokenizer, outputdir, epoch):
 
 
 def main(rank, args, world_size):
-    wandb.init(
-        project="brainlessgpt", 
-        entity="kenotron",
-        config=args.__dict__
-    )
-
-    ## Setup DDP
-    # ddp_setup(rank, world_size, args.master_port)
     print(f"rank: {rank}")
 
     # Save model configuration
@@ -126,21 +96,17 @@ def main(rank, args, world_size):
         tokenized_dataset["train"],
         batch_size=args.batch_size,
         collate_fn=collate_fn,
-        # sampler=DistributedSampler(tokenized_dataset["train"]),
         shuffle=True,
     )
     valid_dataloader = DataLoader(
         tokenized_dataset["validation"],
         batch_size=args.batch_size,
         collate_fn=collate_fn,
-        # sampler=DistributedSampler(tokenized_dataset["validation"]),
     )
 
     # Define model
     model_config = AutoConfig.from_pretrained(args.model_path)
     LLM = AutoModelForCausalLM.from_config(model_config)    
-    # LLM = LLM.to(device)
-    # LLM = DDP(LLM, device_ids=[rank])
 
     ## Initialise criterion and optimiser
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1)
@@ -170,6 +136,7 @@ def main(rank, args, world_size):
         num_warmup_steps=num_warmup_steps,
         num_training_steps=max_train_steps,
     )
+
     LLM, optimizer, train_dataloader, valid_dataloader, lr_scheduler = accelerator.prepare(
         LLM, optimizer, train_dataloader, valid_dataloader, lr_scheduler)
 
@@ -181,24 +148,40 @@ def main(rank, args, world_size):
         start = time.time()
         optimizer.zero_grad()
         for i, batch in enumerate(train_dataloader):
-            logits = LLM(**batch).logits[:, :-1]
-            labels = batch["labels"][:, 1:]
-            loss = criterion(logits.view(-1, logits.size(-1)), labels.reshape(-1))
+            
+            # print and move to numpy so we get to see all the values
+            if i >= 592:
+                np.set_printoptions(threshold=np.inf)
+                print("batch", i)
+                print("input_ids", batch["input_ids"].detach().cpu().numpy())
+                print("attention_mask", batch["attention_mask"].detach().cpu().numpy())
+                print("labels", batch["labels"].detach().cpu().numpy())
+
+            # logits = LLM(**batch).logits[:, :-1].contiguous()
+            # labels = batch["labels"][:, 1:].contiguous()
+            # loss = criterion(logits.view(-1, logits.size(-1)), labels.reshape(-1))
+
+            labels = batch["labels"].to(LLM.device)
+            shift_logits = LLM(**batch).logits[..., :-1, :].contiguous()
+            shift_labels = labels[..., 1:].contiguous()
+            loss_fct = torch.nn.CrossEntropyLoss(ignore_index=-1)
+            loss = loss_fct(shift_logits.view(-1, shift_logits.size(-1)), shift_labels.view(-1))
+
+
             loss = loss / args.gradient_accumulation_steps
             # loss.backward()
             accelerator.backward(loss)
 
             if (i + 1) % args.gradient_accumulation_steps == 0:
-                # torch.nn.utils.clip_grad_norm_(model.parameters(), 1.0)
                 optimizer.step()
                 lr_scheduler.step()
                 optimizer.zero_grad()
             if (i + 1) % args.log_interval == 0 and accelerator.is_main_process:
                 elasped_time = time.time() - start
                 PPL = math.exp(loss.item() * args.gradient_accumulation_steps)
-                logging(f"Epoch {epoch} | Batch {i}/{trainsize} | PPL: {PPL} | time {elasped_time}", args.logfile)
-                wandb.log({"Epoch": epoch, "Batch": i, "Training PPL": PPL, "Learning Rate": optimizer.param_groups[0]["lr"]})
-            
+                logging(f"Epoch {epoch} | Batch {i}/{trainsize} | Training PPL: {PPL} | time {elasped_time}", args.logfile)
+                accelerator.log({"Epoch": epoch, "Batch": i, "Training PPL": PPL, "Learning Rate": optimizer.param_groups[0]["lr"]})
+
             if args.save_interval > 0 and (i + 1) % args.save_interval == 0:
                 # Evaluate every args.save_interval steps
                 LLM.eval()
@@ -210,12 +193,13 @@ def main(rank, args, world_size):
                     if accelerator.is_main_process:
                         val_ppl = math.exp(val_loss)
                         logging(f"Epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
-                        wandb.log({"Epoch": epoch, "Batch": i, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
+                        accelerator.log({"Epoch": epoch, "Batch": i, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
                         if val_loss < best_val_loss:
                             ckpt_path = os.path.join(args.outputdir, "checkpoint.{}_{}".format(epoch, (i + 1)))
                             logging(f"Save checkpoint to {ckpt_path}", args.logfile)
                             save_checkpoint(LLM, tokenizer, args.outputdir, f"{epoch}_{(i+1)}")
                 LLM.train()
+       
         # Evaluate again at the end of epoch
         LLM.eval()
         with torch.no_grad():
@@ -226,13 +210,12 @@ def main(rank, args, world_size):
             if accelerator.is_main_process:
                 val_ppl = math.exp(val_loss)
                 logging(f"End of epoch {epoch} | Validation PPL: {val_ppl/world_size} | Learning rate: {current_lr}", args.logfile)
-                wandb.log({"End of epoch": epoch, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
+                accelerator.log({"End of epoch": epoch, "Validation PPL": val_ppl, "Learning Rate": optimizer.param_groups[0]["lr"]})
                 if val_loss < best_val_loss:
                     ckpt_path = os.path.join(args.outputdir, "checkpoint.{}".format(epoch))
                     logging(f"Save checkpoint to {ckpt_path}", args.logfile)
                     save_checkpoint(LLM, tokenizer, args.outputdir, f"{epoch}")
         LLM.train()
-    wandb.finish()
 
 
 def evaluate(args, LLM, valid_dataloader, criterion):
@@ -353,5 +336,17 @@ if __name__ == "__main__":
     args = parser.parse_args()
     world_size = torch.cuda.device_count()
     print(world_size)
-    # mp.spawn(main, args=(args, world_size,), nprocs=world_size)
+
+    accelerator = Accelerator(log_with="wandb")
+    accelerator.init_trackers(
+        project_name="brainlessgpt",
+        init_kwargs={"wandb": {"entity": "kenotron"}},
+        config=args.__dict__
+    )
+
+    device = accelerator.device
+    random.seed(1)
+    torch.manual_seed(1)
+
     main(0, args, world_size)
+    accelerator.end_training()
