@@ -11,9 +11,10 @@
     "num_warmup_steps": 0.03,
     "weight_decay": 0.001,
     "lr_scheduler_type": "cosine",
-    "outputdir": "exp/gpt2",
-    "logfile": "exp/gpt2/log.txt",
+    "outputdir": "exp/finetune_gpt2",
+    "logfile": "exp/finetune_gpt2/log.txt",
     "log_interval": 1000,
     "save_interval": 10000,
-    "master_port": "12355"
+    "master_port": "12355",
+    "train_mode": "finetune"
 }

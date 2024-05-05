@@ -105,8 +105,13 @@ def main(rank, args, world_size):
     )
 
     # Define model
-    model_config = AutoConfig.from_pretrained(args.model_path)
-    LLM = AutoModelForCausalLM.from_config(model_config)    
+    if args.train_mode == "scratch":
+        model_config = AutoConfig.from_pretrained(args.model_path)
+        LLM = AutoModelForCausalLM.from_config(model_config)
+    elif args.train_mode == "finetune":
+        LLM = AutoModelForCausalLM.from_pretrained(args.model_path, cache_dir=args.cache_dir)
+    else:
+        raise ValueError("Invalid train mode")
 
     ## Initialise criterion and optimiser
     criterion = torch.nn.CrossEntropyLoss(ignore_index=-1)
@@ -338,6 +343,13 @@ if __name__ == "__main__":
         type=str,
         default='12355',
         help="Master port number",
+    )
+    parser.add_argument(
+        "--train_mode",
+        type=str,
+        default='scratch',
+        help="Training mode",
+        choices=["scratch", "finetune"]
     )
     args = parser.parse_args()
     world_size = torch.cuda.device_count()
