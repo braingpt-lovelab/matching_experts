@@ -2,7 +2,8 @@
 
 # Define the JSON file and expdir
 args_json="configs/gpt2_test.json"
-expdir="exp/finetune_gpt2"
+
+expdir=$(python3 -c "import json; import sys; d = json.load(open('$args_json')); sys.stdout.write(d['outputdir'])")
 mkdir -p $expdir
 
 # Extract the JSON contents into Bash-friendly key-value pairs
