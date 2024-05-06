@@ -25,4 +25,4 @@ print(tokenizer.tokenize(example))
 print(tokenizer.vocab_size)
 
 # Save the new tokenizer
-tokenizer.save_pretrained("gpt2_neuro_tokenizer")
+tokenizer.save_pretrained("cache/gpt2_neuro_tokenizer")
