@@ -2,7 +2,7 @@
 
 # Define the JSON file and expdir
 args_json="configs/gpt2_test.json"
-expdir="exp/gpt2"
+expdir="exp/finetune_gpt2"
 mkdir -p $expdir
 
 # Extract the JSON contents into Bash-friendly key-value pairs
