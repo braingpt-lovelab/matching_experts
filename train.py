@@ -83,7 +83,12 @@ def main(rank, args, world_size):
     dataset = load_dataset(args.data_path, cache_dir=args.cache_dir)
 
     # Load tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(args.model_path, cache_dir=args.cache_dir)
+    if args.custom_tokenizer:
+        print(f"Load custom tokenizer from {args.custom_tokenizer}")
+        tokenizer = AutoTokenizer.from_pretrained(args.custom_tokenizer, cache_dir=args.cache_dir)
+    else:
+        print(f"Load pretrained tokenizer")
+        tokenizer = AutoTokenizer.from_pretrained(args.model_path, cache_dir=args.cache_dir)
     tokenized_dataset = dataset.map(
         tokenize,
         fn_kwargs={"tokenizer": tokenizer, "args": args},
