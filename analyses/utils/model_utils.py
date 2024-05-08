@@ -2,6 +2,50 @@ import transformers
 import torch
 
 
+# llms = [
+#         "gpt2_scratch_neuro_tokenizer",
+#         "finetune_gpt2",
+#         "gpt2",
+#         "gpt2_init",
+#         "gpt2_scratch"
+#     ]
+
+model_list = {
+    "gpt2": {
+        "gpt2_init": {
+            "llm": "Untrained",
+            "color": '#A5CAD2',
+            "alpha": 0.3,
+            "hatch": "",
+        },
+        "gpt2": {
+            "llm": "Pretrained",
+            "color": '#758EB7',
+            "alpha": 0.4,
+            "hatch": "",
+        },
+        "gpt2_scratch": {
+            "llm": "Scratch",
+            "color": '#E1C0D8',
+            "alpha": 0.6,
+            "hatch": "",
+        },
+        "finetune_gpt2": {
+            "llm": "Finetuned from pretrained",
+            "color": '#D2A9B0',
+            "alpha": 0.8,
+            "hatch": "",
+        },
+        "gpt2_scratch_neuro_tokenizer": {
+            "llm": "Scratch + Neuro tokenizer",
+            "color": '#FA9284',
+            "alpha": 0.9,
+            "hatch": "",
+        },
+    },
+}
+
+
 def load_model_and_tokenizer(model_fpath, tokenizer_only=False):
     if tokenizer_only:
         tokenizer = transformers.AutoTokenizer.from_pretrained(
