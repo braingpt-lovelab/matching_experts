@@ -1,3 +1,6 @@
 [submodule "analyses/testcases"]
 	path = analyses/testcases
 	url = git@github.com:braingpt-lovelab/brainbench_testcases.git
+[submodule "analyses/human_results"]
+	path = analyses/human_results
+	url = git@github.com:braingpt-lovelab/brainbench_participant_data.git
