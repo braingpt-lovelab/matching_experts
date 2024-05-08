@@ -136,7 +136,7 @@ if __name__ == "__main__":
         "gpt2_scratch_neuro_tokenizer",
         "finetune_gpt2",
         "gpt2",
-        "gpt2_init"
+        "gpt2_init",
         "gpt2_scratch"
     ]
 
