@@ -11,10 +11,11 @@
     "num_warmup_steps": 0.03,
     "weight_decay": 0.001,
     "lr_scheduler_type": "cosine",
-    "outputdir": "exp/finetune_gpt2",
-    "logfile": "exp/finetune_gpt2/log.txt",
+    "outputdir": "exp/gpt2_scratch_neuro_tokenizer",
+    "logfile": "exp/gpt2_scratch_neuro_tokenizer/log.txt",
     "log_interval": 1000,
     "save_interval": 10000,
     "master_port": "12355",
-    "train_mode": "finetune"
+    "train_mode": "scratch",
+    "custom_tokenizer": "cache/gpt2_neuro_tokenizer"
 }

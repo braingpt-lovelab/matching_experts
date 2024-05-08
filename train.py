@@ -83,7 +83,12 @@ def main(rank, args, world_size):
     dataset = load_dataset(args.data_path, cache_dir=args.cache_dir)
 
     # Load tokenizer
-    tokenizer = AutoTokenizer.from_pretrained(args.model_path, cache_dir=args.cache_dir)
+    if args.custom_tokenizer:
+        print(f"Load custom tokenizer from {args.custom_tokenizer}")
+        tokenizer = AutoTokenizer.from_pretrained(args.custom_tokenizer, cache_dir=args.cache_dir)
+    else:
+        print(f"Load pretrained tokenizer")
+        tokenizer = AutoTokenizer.from_pretrained(args.model_path, cache_dir=args.cache_dir)
     tokenized_dataset = dataset.map(
         tokenize,
         fn_kwargs={"tokenizer": tokenizer, "args": args},
@@ -107,9 +112,14 @@ def main(rank, args, world_size):
     # Define model
     if args.train_mode == "scratch":
         model_config = AutoConfig.from_pretrained(args.model_path)
+        # Update vocab size if using custom tokenizer
+        if args.custom_tokenizer:
+            model_config.vocab_size = tokenizer.vocab_size
         LLM = AutoModelForCausalLM.from_config(model_config)
     elif args.train_mode == "finetune":
         LLM = AutoModelForCausalLM.from_pretrained(args.model_path, cache_dir=args.cache_dir)
+        if args.custom_tokenizer:
+            raise ValueError("Bad idea to use custom tokenizer for finetuning?")
     else:
         raise ValueError("Invalid train mode")
 
@@ -350,6 +360,12 @@ if __name__ == "__main__":
         default='scratch',
         help="Training mode",
         choices=["scratch", "finetune"]
+    )
+    parser.add_argument(
+        "--custom_tokenizer",
+        type=str,
+        default=None,
+        help="Custom tokenizer path",
     )
     args = parser.parse_args()
     world_size = torch.cuda.device_count()
