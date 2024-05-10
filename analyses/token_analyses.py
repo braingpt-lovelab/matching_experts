@@ -1,6 +1,7 @@
 import json
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn2
+from matplotlib.gridspec import GridSpec
 
 
 def _load_tagging_results(fname):
@@ -59,38 +60,46 @@ def main():
     common_proportion = common_term_proportion()
     pretrain_proportion, neuro_proportion = neuro_term_proportion()
 
-    # Left plots 2 intersected pies the intersection has the common_proportion
-    # Right plots 2 individual pies, each shows the proportion of neuro terms in each vocab.
-    fig, axes = plt.subplots(1, 3, figsize=(15, 5))
-    plt.rcParams.update({'font.size': 14, 'font.weight': 'bold'})
-    
-    # Venn diagram for Shared and Unique
-    # The subsets parameter needs proper values for exclusive and shared areas.
-    total = 1.0  # Normalize total to 1 for simplicity in this example
+    plt.rcParams.update({'font.size': 16, 'font.weight': 'bold'})
+
+    # Create figure and define grid layout
+    fig = plt.figure(figsize=(8, 6))
+    gs = GridSpec(2, 2, figure=fig)
+
+    # Top plot - Venn Diagram
+    ax1 = fig.add_subplot(gs[0, :])  # Span both columns at the top
+    total = 1.0
     shared = common_proportion * total
-    exclusive = (total - shared) / 2  # Assuming equal exclusive parts for simplicity
+    exclusive = (total - shared) / 2
 
     venn_diagram = venn2(
         subsets=(exclusive, exclusive, shared), 
-        set_labels=('Pretrain\nVocab.', 'Neuro Tokenizer\nVocab.'),
-        ax=axes[0]
+        # set_labels=('Pretrain\nVocab.', 'Neuro Tokenizer\nVocab.'),
+        set_labels=('', ''),
+        ax=ax1
     )
-
+    
+    venn_diagram.get_patch_by_id('10').set_alpha(1)
+    venn_diagram.get_patch_by_id('01').set_alpha(1)
+    venn_diagram.get_patch_by_id('11').set_alpha(0.5)
     venn_diagram.get_patch_by_id('10').set_color('skyblue')
     venn_diagram.get_patch_by_id('01').set_color('lightgreen')
-    venn_diagram.get_patch_by_id('11').set_color('salmon')
-
+    venn_diagram.get_patch_by_id('11').set_color('grey')
     venn_diagram.get_label_by_id('10').set_text('')
     venn_diagram.get_label_by_id('01').set_text('')
-    venn_diagram.get_label_by_id('11').set_text(f'Shared Tokens\n{shared*100:.2f}%')
-    
-    axes[1].pie([pretrain_proportion, 1 - pretrain_proportion], labels=["Neuro Tokens", ""],
-                autopct='%1.2f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'skyblue'])
-    axes[1].set_xlabel("Pretrain\nVocab.", fontsize=14, fontweight='bold')
+    venn_diagram.get_label_by_id('11').set_text(f'Shared\nTokens\n{shared*100:.1f}%')
 
-    axes[2].pie([neuro_proportion, 1 - neuro_proportion], labels=["Neuro Tokens", ""],
-                autopct='%1.2f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'lightgreen'])
-    axes[2].set_xlabel("Neuro Tokenizer\nVocab.", fontsize=14, fontweight='bold')
+    # Bottom left - Pretrain Vocab Pie Chart
+    ax2 = fig.add_subplot(gs[1, 0])
+    ax2.pie([pretrain_proportion, 1 - pretrain_proportion], labels=["Neuro\nTokens", ""],
+            autopct='%1.1f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'skyblue'])
+    ax2.set_xlabel("Pretrain\nVocab.", fontsize=16, fontweight='bold')
+
+    # Bottom right - Neuro Tokenizer Vocab Pie Chart
+    ax3 = fig.add_subplot(gs[1, 1])
+    ax3.pie([neuro_proportion, 1 - neuro_proportion], labels=["Neuro\nTokens", ""],
+            autopct='%1.1f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'lightgreen'])
+    ax3.set_xlabel("Neuro Tokenizer\nVocab.", fontsize=16, fontweight='bold')
 
     plt.tight_layout()
     plt.savefig("figs/shared_terms_and_neuro_term_proportion.pdf")
