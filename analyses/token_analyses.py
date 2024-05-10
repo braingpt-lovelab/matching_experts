@@ -89,17 +89,22 @@ def main():
     venn_diagram.get_label_by_id('01').set_text('')
     venn_diagram.get_label_by_id('11').set_text(f'Shared\nTokens\n{shared*100:.1f}%')
 
+    # Add label A to upper left corner of ax1
+    ax1.text(-0.8, 0.5, 'A', fontsize=16, fontweight='bold')
+
     # Bottom left - Pretrain Vocab Pie Chart
     ax2 = fig.add_subplot(gs[1, 0])
     ax2.pie([pretrain_proportion, 1 - pretrain_proportion], labels=["Neuro\nTokens", ""],
             autopct='%1.1f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'skyblue'])
     ax2.set_xlabel("Pretrain\nVocab.", fontsize=16, fontweight='bold')
+    ax2.text(-2, 1.5, 'B', fontsize=16, fontweight='bold')
 
     # Bottom right - Neuro Tokenizer Vocab Pie Chart
     ax3 = fig.add_subplot(gs[1, 1])
     ax3.pie([neuro_proportion, 1 - neuro_proportion], labels=["Neuro\nTokens", ""],
             autopct='%1.1f%%', startangle=90, explode=(0.1, 0.), colors=['cyan', 'lightgreen'])
     ax3.set_xlabel("Neuro Tokenizer\nVocab.", fontsize=16, fontweight='bold')
+    ax3.text(-2, 1.5, 'C', fontsize=16, fontweight='bold')
 
     plt.tight_layout()
     plt.savefig("figs/shared_terms_and_neuro_term_proportion.pdf")
