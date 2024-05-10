@@ -1,0 +1,21 @@
+{
+  "model_path": "gpt2",
+  "cache_dir": "cache",
+  "data_path": "BrainGPT/train_valid_split_pmc_neuroscience_2002-2022_filtered_subset",
+  "batch_size": 16,
+  "chunk_size": 1024,
+  "eval_batch_size": 16,
+  "weight_decay": 0.001,
+  "learning_rate": 2e-05,
+  "num_train_epochs": 5,
+  "max_train_steps": null,
+  "gradient_accumulation_steps": 8,
+  "lr_scheduler_type": "cosine",
+  "num_warmup_steps": 0.03,
+  "logfile": "exp/finetune_gpt2/log.txt",
+  "outputdir": "exp/finetune_gpt2",
+  "log_interval": 1000,
+  "save_interval": 10000,
+  "master_port": "12355",
+  "train_mode": "finetune"
+}

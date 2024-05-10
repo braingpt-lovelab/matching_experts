@@ -1,5 +1,5 @@
-cache/
-exp/
+model_training/cache/
+model_training/exp/**/model.safetensors
 **/.DS_Store
 
 # Byte-compiled / optimized / DLL files

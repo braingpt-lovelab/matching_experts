@@ -1,0 +1,103 @@
+Loading 994516 samples for training
+Loading 994516 samples for training
+Loading 994516 samples for training
+Loading 994516 samples for training
+Start training
+Start training
+Start training
+Start training
+Epoch 0 | Batch 999/15540 | Training PPL: 9822.795291982733 | time 454.9008605480194
+Epoch 0 | Batch 1999/15540 | Training PPL: 2290.874933772452 | time 909.9044840335846
+Epoch 0 | Batch 2999/15540 | Training PPL: 869.1304664368123 | time 1365.0144176483154
+Epoch 0 | Batch 3999/15540 | Training PPL: 573.7188528683242 | time 1820.2125685214996
+Epoch 0 | Batch 4999/15540 | Training PPL: 424.7297624205262 | time 2275.4189460277557
+Epoch 0 | Batch 5999/15540 | Training PPL: 356.31711741042784 | time 2730.6200735569
+Epoch 0 | Batch 6999/15540 | Training PPL: 270.85676983172965 | time 3185.8734645843506
+Epoch 0 | Batch 7999/15540 | Training PPL: 260.26164956793315 | time 3641.1251153945923
+Epoch 0 | Batch 8999/15540 | Training PPL: 253.85970905433896 | time 4096.283658027649
+Epoch 0 | Batch 9999/15540 | Training PPL: 203.51119893776266 | time 4551.416658163071
+Epoch 0 | Validation PPL: 195.7980701366446 | Learning rate: 1.9493405666805684e-05
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.0_10000
+Epoch 0 | Batch 10999/15540 | Training PPL: 203.01824284123492 | time 5032.655478477478
+Epoch 0 | Batch 11999/15540 | Training PPL: 190.63843216652546 | time 5487.464522361755
+Epoch 0 | Batch 12999/15540 | Training PPL: 132.41678098026117 | time 5942.2279760837555
+Epoch 0 | Batch 13999/15540 | Training PPL: 131.2599387809501 | time 6397.005483388901
+Epoch 0 | Batch 14999/15540 | Training PPL: 130.44791963789126 | time 6851.784734725952
+End of epoch 0 | Validation PPL: 112.21000946327923 | Learning rate: 1.852304043748133e-05
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.0
+Epoch 1 | Batch 999/15540 | Training PPL: 130.97615173304257 | time 455.798885345459
+Epoch 1 | Batch 1999/15540 | Training PPL: 130.77913185221763 | time 910.5265941619873
+Epoch 1 | Batch 2999/15540 | Training PPL: 117.35924675559332 | time 1365.2019202709198
+Epoch 1 | Batch 3999/15540 | Training PPL: 104.51928752517827 | time 1819.8522806167603
+Epoch 1 | Batch 4999/15540 | Training PPL: 94.60779172715156 | time 2274.5508251190186
+Epoch 1 | Batch 5999/15540 | Training PPL: 82.89184912504491 | time 2729.2658262252808
+Epoch 1 | Batch 6999/15540 | Training PPL: 67.62116799811733 | time 3183.957654953003
+Epoch 1 | Batch 7999/15540 | Training PPL: 71.88175711359287 | time 3638.6482920646667
+Epoch 1 | Batch 8999/15540 | Training PPL: 72.2218562146104 | time 4093.3222296237946
+Epoch 1 | Batch 9999/15540 | Training PPL: 63.5050677000881 | time 4547.994668006897
+Epoch 1 | Validation PPL: 60.23888656328316 | Learning rate: 1.5675659108460086e-05
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.1_10000
+Epoch 1 | Batch 10999/15540 | Training PPL: 69.97352596841073 | time 5029.643318653107
+Epoch 1 | Batch 11999/15540 | Training PPL: 75.11098844220871 | time 5485.559025287628
+Epoch 1 | Batch 12999/15540 | Training PPL: 51.49024754723307 | time 5940.448143005371
+Epoch 1 | Batch 13999/15540 | Training PPL: 50.63940673809141 | time 6395.216953754425
+Epoch 1 | Batch 14999/15540 | Training PPL: 60.123296771644746 | time 6850.016938924789
+End of epoch 1 | Validation PPL: 48.885185322390065 | Learning rate: 1.3642155158085106e-05
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.1
+Epoch 2 | Batch 999/15540 | Training PPL: 60.86247610597377 | time 455.75077962875366
+Epoch 2 | Batch 1999/15540 | Training PPL: 67.2136722060144 | time 910.4620988368988
+Epoch 2 | Batch 2999/15540 | Training PPL: 61.09465443899543 | time 1365.2027232646942
+Epoch 2 | Batch 3999/15540 | Training PPL: 58.624387545343026 | time 1820.3952617645264
+Epoch 2 | Batch 4999/15540 | Training PPL: 49.4943641041214 | time 2283.6058230400085
+Epoch 2 | Batch 5999/15540 | Training PPL: 47.482063981263295 | time 2745.754918575287
+Epoch 2 | Batch 6999/15540 | Training PPL: 39.6686918335197 | time 3200.388281583786
+Epoch 2 | Batch 7999/15540 | Training PPL: 42.646448199477895 | time 3655.0046803951263
+Epoch 2 | Batch 8999/15540 | Training PPL: 44.376818107773126 | time 4109.570090293884
+Epoch 2 | Batch 9999/15540 | Training PPL: 42.13697201624591 | time 4564.208705186844
+Epoch 2 | Validation PPL: 39.537625762600136 | Learning rate: 9.559763306383965e-06
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.2_10000
+Epoch 2 | Batch 10999/15540 | Training PPL: 46.79846801576275 | time 5045.615168571472
+Epoch 2 | Batch 11999/15540 | Training PPL: 52.34113107128591 | time 5500.474033117294
+Epoch 2 | Batch 12999/15540 | Training PPL: 35.87085259440678 | time 5955.307519674301
+Epoch 2 | Batch 13999/15540 | Training PPL: 35.83554907146805 | time 6410.166393280029
+Epoch 2 | Batch 14999/15540 | Training PPL: 45.41890641266438 | time 6865.017686843872
+End of epoch 2 | Validation PPL: 36.94057819725657 | Learning rate: 7.2865132095249525e-06
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.2
+Epoch 3 | Batch 999/15540 | Training PPL: 45.396702155478714 | time 454.73554372787476
+Epoch 3 | Batch 1999/15540 | Training PPL: 52.48744046118238 | time 909.4749076366425
+Epoch 3 | Batch 2999/15540 | Training PPL: 48.03288000563425 | time 1364.2970814704895
+Epoch 3 | Batch 3999/15540 | Training PPL: 46.99051550664091 | time 1819.0593149662018
+Epoch 3 | Batch 4999/15540 | Training PPL: 39.283927581542656 | time 2273.856464624405
+Epoch 3 | Batch 5999/15540 | Training PPL: 38.65597025800025 | time 2728.6312911510468
+Epoch 3 | Batch 6999/15540 | Training PPL: 32.425936334597715 | time 3183.3861167430878
+Epoch 3 | Batch 7999/15540 | Training PPL: 35.787428210507244 | time 3638.20369720459
+Epoch 3 | Batch 8999/15540 | Training PPL: 37.26801500716807 | time 4097.155663013458
+Epoch 3 | Batch 9999/15540 | Training PPL: 36.02542500602971 | time 4553.387081623077
+Epoch 3 | Validation PPL: 34.40315939939548 | Learning rate: 3.6221251489553254e-06
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.3_10000
+Epoch 3 | Batch 10999/15540 | Training PPL: 41.335902172138326 | time 5034.882574558258
+Epoch 3 | Batch 11999/15540 | Training PPL: 46.07329849814856 | time 5490.361439943314
+Epoch 3 | Batch 12999/15540 | Training PPL: 31.523864662507435 | time 5945.297678947449
+Epoch 3 | Batch 13999/15540 | Training PPL: 31.965023401008704 | time 6400.174942970276
+Epoch 3 | Batch 14999/15540 | Training PPL: 41.38902649615922 | time 6855.084867238998
+End of epoch 3 | Validation PPL: 33.69402070672074 | Learning rate: 2.0295978575124462e-06
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.3
+Epoch 4 | Batch 999/15540 | Training PPL: 41.295515401761655 | time 454.7165586948395
+Epoch 4 | Batch 1999/15540 | Training PPL: 48.38189120685228 | time 909.4122660160065
+Epoch 4 | Batch 2999/15540 | Training PPL: 44.761662445678645 | time 1364.093103647232
+Epoch 4 | Batch 3999/15540 | Training PPL: 44.143788261243415 | time 1818.7705175876617
+Epoch 4 | Batch 4999/15540 | Training PPL: 36.98785088416065 | time 2273.435224056244
+Epoch 4 | Batch 5999/15540 | Training PPL: 36.34257509282204 | time 2728.133129835129
+Epoch 4 | Batch 6999/15540 | Training PPL: 30.65133097583311 | time 3182.7488021850586
+Epoch 4 | Batch 7999/15540 | Training PPL: 34.20102620343051 | time 3637.39323925972
+Epoch 4 | Batch 8999/15540 | Training PPL: 35.78749646967461 | time 4092.045295715332
+Epoch 4 | Batch 9999/15540 | Training PPL: 35.11025093836121 | time 4546.680070400238
+Epoch 4 | Validation PPL: 33.25296557410712 | Learning rate: 2.669726527405869e-07
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.4_10000
+Epoch 4 | Batch 10999/15540 | Training PPL: 39.92895863509749 | time 5027.959244966507
+Epoch 4 | Batch 11999/15540 | Training PPL: 44.74232893648832 | time 5482.752742290497
+Epoch 4 | Batch 12999/15540 | Training PPL: 30.680620194939856 | time 5937.5476360321045
+Epoch 4 | Batch 13999/15540 | Training PPL: 31.238203207618923 | time 6392.308540344238
+Epoch 4 | Batch 14999/15540 | Training PPL: 40.62322636865452 | time 6847.027564287186
+End of epoch 4 | Validation PPL: 33.22448409785952 | Learning rate: 3.474915192258621e-12
+Save checkpoint to exp/gpt2_scratch_neuro_tokenizer/checkpoint.4
