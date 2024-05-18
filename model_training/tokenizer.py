@@ -1,3 +1,4 @@
+import os
 import json
 from datasets import load_dataset
 
@@ -24,4 +25,6 @@ print(tokenizer.tokenize(example))
 print(tokenizer.vocab_size)
 
 # Save the new tokenizer
+if not os.path.exists("cache"):
+    os.makedirs("cache")
 tokenizer.save_pretrained("cache/gpt2_neuro_tokenizer")
