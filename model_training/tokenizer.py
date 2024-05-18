@@ -1,8 +1,7 @@
 import json
 from datasets import load_dataset
 
-# Load json file `configs/gpt2_test.json`
-args = json.load(open('configs/gpt2_test.json'))
+args = json.load(open('configs/gpt2_scratch.json'))
 dataset = load_dataset(args["data_path"], cache_dir=args["cache_dir"])
 
 def get_training_corpus(dataset):
