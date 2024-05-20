@@ -367,14 +367,26 @@ if __name__ == "__main__":
         default=None,
         help="Custom tokenizer path",
     )
+    parser.add_argument(
+        "--wandb_project",
+        type=str,
+        default="brainlessgpt",
+        help="Wandb project name",
+    )
+    parser.add_argument(
+        "--wandb_entity",
+        type=str,
+        default="kenotron",
+        help="Wandb entity name",
+    )
     args = parser.parse_args()
     world_size = torch.cuda.device_count()
     print(world_size)
 
     accelerator = Accelerator(log_with="wandb")
     accelerator.init_trackers(
-        project_name="brainlessgpt",
-        init_kwargs={"wandb": {"entity": "kenotron"}},
+        project_name=args.wandb_project,
+        init_kwargs={"wandb": {"entity": args.wandb_entity}},
         config=args.__dict__
     )
 

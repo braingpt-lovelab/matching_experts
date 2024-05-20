@@ -17,5 +17,7 @@
     "save_interval": 10000,
     "master_port": "12355",
     "train_mode": "scratch",
-    "custom_tokenizer": "cache/gpt2_neuro_tokenizer"
+    "custom_tokenizer": "cache/gpt2_neuro_tokenizer",
+    "wandb_project": "brainlessgpt",
+    "wandb_entity": "kenotron"
 }

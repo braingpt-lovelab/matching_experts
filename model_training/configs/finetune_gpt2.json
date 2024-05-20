@@ -17,5 +17,7 @@
     "save_interval": 10000,
     "master_port": "12355",
     "train_mode": "finetune",
-    "custom_tokenizer": null
+    "custom_tokenizer": null,
+    "wandb_project": "brainlessgpt",
+    "wandb_entity": "kenotron"
 }
