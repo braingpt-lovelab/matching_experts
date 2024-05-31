@@ -1,13 +1,13 @@
-
 import os
 import argparse
 import numpy as np
 import pandas as pd
+import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 from utils.model_utils import model_list
 from utils.general_utils import str2bool
-from utils.general_utils import scorer_acc
+from utils.general_utils import scorer_acc, scorer_sem
 
 
 def get_llm_accuracies(model_results_dir, use_human_abstract=True):
@@ -29,7 +29,10 @@ def get_llm_accuracies(model_results_dir, use_human_abstract=True):
             labels = np.load(f"{results_dir}/{label_fname}.npy")
 
             acc = scorer_acc(PPL_A_and_B, labels)
+            sem = scorer_sem(PPL_A_and_B, labels)
             llms[llm_family][llm]["acc"] = acc
+            llms[llm_family][llm]["sem"] = sem
+            
     return llms
 
 
@@ -51,7 +54,8 @@ def get_human_accuracies(use_human_abstract):
             correct += row["correct"]
             total += 1
     acc = correct / total
-    return acc
+    sem = np.sqrt(acc * (1 - acc) / total)
+    return acc, sem
 
 
 def get_human_accuracies_top_expertise(use_human_abstract, top_pct=0.2):
@@ -81,7 +85,8 @@ def get_human_accuracies_top_expertise(use_human_abstract, top_pct=0.2):
         correct += row["correct"]
         total += 1
     acc = correct / total
-    return acc
+    sem = np.sqrt(acc * (1 - acc) / total)
+    return acc, sem
 
 
 def plot(use_human_abstract):
@@ -101,6 +106,7 @@ def plot(use_human_abstract):
 
     # llms
     all_llm_accuracies = []
+    all_llm_sems = []
     all_llm_names = []
     all_llm_colors = []
     all_llm_hatches = []
@@ -109,6 +115,7 @@ def plot(use_human_abstract):
     for family_index, llm_family in enumerate(llms.keys()):
         for llm in llms[llm_family]:
             all_llm_accuracies.append(llms[llm_family][llm]["acc"])
+            all_llm_sems.append(llms[llm_family][llm]["sem"])
             all_llm_names.append(llms[llm_family][llm]["llm"])
             all_llm_colors.append(llms[llm_family][llm]["color"])
             all_llm_hatches.append(llms[llm_family][llm]["hatch"])
@@ -120,20 +127,29 @@ def plot(use_human_abstract):
     ax.bar(
         all_llm_xticks,
         all_llm_accuracies,
+        yerr=all_llm_sems,
         color=all_llm_colors,
         hatch=all_llm_hatches,
         alpha=0.7,
         label=all_llm_names,
-        edgecolor='k'
+        edgecolor='k',
+        capsize=3
     )
 
     # human
     # plot as horizontal line
-    human_acc = get_human_accuracies(use_human_abstract)
+    human_acc, human_sem = get_human_accuracies(use_human_abstract)
     ax.axhline(y=human_acc, color='b', linestyle='--', lw=3)
+    # ax.fill_between(
+    #     [all_llm_xticks[0], all_llm_xticks[-1]+1],
+    #     human_acc - human_sem,
+    #     human_acc + human_sem,
+    #     color='b',
+    #     alpha=0.3
+    # )
 
     print('human_acc:', human_acc)
-    human_acc_top_expertise = get_human_accuracies_top_expertise(use_human_abstract)
+    human_acc_top_expertise, _ = get_human_accuracies_top_expertise(use_human_abstract)
     print('human_acc_top_expertise:', human_acc_top_expertise)
 
     # Add annotations (Human expert)
