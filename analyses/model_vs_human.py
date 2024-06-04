@@ -168,6 +168,7 @@ def plot(use_human_abstract):
     ax.set_xticks([])
     ax.spines['right'].set_visible(False)
     ax.spines['top'].set_visible(False)
+    ax.grid(axis='y', linestyle='--', alpha=0.6)
 
     plt.legend(all_llm_names, loc='upper left')
     plt.tight_layout()
