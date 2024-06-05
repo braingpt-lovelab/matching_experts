@@ -83,7 +83,7 @@ def main(rank, args, world_size):
     dataset = load_dataset(args.data_path, cache_dir=args.cache_dir)
 
     # Load tokenizer
-    if args.custom_tokenizer:
+    if args.custom_tokenizer != "None":
         print(f"Load custom tokenizer from {args.custom_tokenizer}")
         tokenizer = AutoTokenizer.from_pretrained(args.custom_tokenizer, cache_dir=args.cache_dir)
     else:
@@ -111,14 +111,16 @@ def main(rank, args, world_size):
 
     # Define model
     if args.train_mode == "scratch":
+        print(f"Train from scratch")
         model_config = AutoConfig.from_pretrained(args.model_path)
         # Update vocab size if using custom tokenizer
-        if args.custom_tokenizer:
+        if args.custom_tokenizer != "None":
             model_config.vocab_size = tokenizer.vocab_size
         LLM = AutoModelForCausalLM.from_config(model_config)
     elif args.train_mode == "finetune":
+        print(f"Finetune from {args.model_path}")
         LLM = AutoModelForCausalLM.from_pretrained(args.model_path, cache_dir=args.cache_dir)
-        if args.custom_tokenizer:
+        if args.custom_tokenizer != "None":
             raise ValueError("Bad idea to use custom tokenizer for finetuning?")
     else:
         raise ValueError("Invalid train mode")

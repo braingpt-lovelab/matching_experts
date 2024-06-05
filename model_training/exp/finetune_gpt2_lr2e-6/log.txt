@@ -1,0 +1,273 @@
+Loading 1131533 samples for training
+Loading 1131533 samples for training
+Loading 1131533 samples for training
+Loading 1131533 samples for training
+Start training
+Start training
+Start training
+Start training
+Epoch 0 | Batch 999/17681 | Training PPL: 22.325256424376224 | time 433.8194508552551
+Epoch 0 | Validation PPL: 18.931282020081227 | Learning rate: 7.540625117822268e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_1000
+Epoch 0 | Batch 1999/17681 | Training PPL: 21.314390153376138 | time 915.0874843597412
+Epoch 0 | Validation PPL: 18.52201187788917 | Learning rate: 1.5081250235644537e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_2000
+Epoch 0 | Batch 2999/17681 | Training PPL: 22.80563112051429 | time 1396.5009999275208
+Epoch 0 | Validation PPL: 17.97130469707389 | Learning rate: 1.999918880174141e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_3000
+Epoch 0 | Batch 3999/17681 | Training PPL: 20.456960330909652 | time 1878.0107309818268
+Epoch 0 | Validation PPL: 17.60463386460066 | Learning rate: 1.998781510643774e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_4000
+Epoch 0 | Batch 4999/17681 | Training PPL: 19.98427123947339 | time 2359.3137514591217
+Epoch 0 | Validation PPL: 17.253669493631993 | Learning rate: 1.9963039231933338e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_5000
+Epoch 0 | Batch 5999/17681 | Training PPL: 21.39821535079107 | time 2840.6847882270813
+Epoch 0 | Validation PPL: 17.01530309225307 | Learning rate: 1.9924894423808595e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_6000
+Epoch 0 | Batch 6999/17681 | Training PPL: 21.461120156912216 | time 3321.8717334270477
+Epoch 0 | Validation PPL: 16.83726876954009 | Learning rate: 1.9873431866786942e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_7000
+Epoch 0 | Batch 7999/17681 | Training PPL: 16.981543779461493 | time 3802.9126403331757
+Epoch 0 | Validation PPL: 16.627652194916983 | Learning rate: 1.9808720616052535e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_8000
+Epoch 0 | Batch 8999/17681 | Training PPL: 17.144332493254712 | time 4284.172989606857
+Epoch 0 | Validation PPL: 16.477585444395757 | Learning rate: 1.97308475045883e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_9000
+Epoch 0 | Batch 9999/17681 | Training PPL: 20.148973096218203 | time 4765.4368414878845
+Epoch 0 | Validation PPL: 16.359915022917114 | Learning rate: 1.9639917026658856e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_10000
+Epoch 0 | Batch 10999/17681 | Training PPL: 18.302806784449754 | time 5246.659303188324
+Epoch 0 | Validation PPL: 16.25025090308567 | Learning rate: 1.9536051197594593e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_11000
+Epoch 0 | Batch 11999/17681 | Training PPL: 18.929598533567468 | time 5727.935309171677
+Epoch 0 | Validation PPL: 16.17620670933948 | Learning rate: 1.9419389390065017e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_12000
+Epoch 0 | Batch 12999/17681 | Training PPL: 19.25310521431303 | time 6209.178224802017
+Epoch 0 | Validation PPL: 16.06401639672389 | Learning rate: 1.929008814706114e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_13000
+Epoch 0 | Batch 13999/17681 | Training PPL: 16.388433058598867 | time 6690.268686056137
+Epoch 0 | Validation PPL: 15.976153164467865 | Learning rate: 1.9148320971837788e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_14000
+Epoch 0 | Batch 14999/17681 | Training PPL: 20.297075824577593 | time 7171.4951248168945
+Epoch 0 | Validation PPL: 15.89562479832739 | Learning rate: 1.8994278095097757e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_15000
+Epoch 0 | Batch 15999/17681 | Training PPL: 21.86833315273445 | time 7652.772025346756
+Epoch 0 | Validation PPL: 15.814178874579781 | Learning rate: 1.8828166219730194e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_16000
+Epoch 0 | Batch 16999/17681 | Training PPL: 19.318899954830616 | time 8133.993499040604
+Epoch 0 | Validation PPL: 15.74797023505172 | Learning rate: 1.8650208243445684e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0_17000
+End of epoch 0 | Validation PPL: 15.692829195326185 | Learning rate: 1.85225515369292e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.0
+Epoch 1 | Batch 999/17681 | Training PPL: 20.655325405566316 | time 452.34456181526184
+Epoch 1 | Validation PPL: 15.6331171102267 | Learning rate: 1.8325237644238193e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_1000
+Epoch 1 | Batch 1999/17681 | Training PPL: 16.40690548671077 | time 933.3292877674103
+Epoch 1 | Validation PPL: 15.575422022614173 | Learning rate: 1.8116752506824722e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_2000
+Epoch 1 | Batch 2999/17681 | Training PPL: 18.787410812660628 | time 1414.2799472808838
+Epoch 1 | Validation PPL: 15.563094469834402 | Learning rate: 1.789737588108621e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_3000
+Epoch 1 | Batch 3999/17681 | Training PPL: 16.99672109493707 | time 1895.2440702915192
+Epoch 1 | Validation PPL: 15.488325637798292 | Learning rate: 1.766740213819586e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_4000
+Epoch 1 | Batch 4999/17681 | Training PPL: 17.297576191948185 | time 2376.2738296985626
+Epoch 1 | Validation PPL: 15.425838529836495 | Learning rate: 1.7427139869099819e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_5000
+Epoch 1 | Batch 5999/17681 | Training PPL: 18.919509779368514 | time 2857.3739006519318
+Epoch 1 | Validation PPL: 15.384331581152868 | Learning rate: 1.7176911470433518e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_6000
+Epoch 1 | Batch 6999/17681 | Training PPL: 19.099245986308148 | time 3338.4623799324036
+Epoch 1 | Validation PPL: 15.354932062541913 | Learning rate: 1.6917052711912787e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_7000
+Epoch 1 | Batch 7999/17681 | Training PPL: 15.250728255823368 | time 3819.527880191803
+Epoch 1 | Validation PPL: 15.296848513895588 | Learning rate: 1.6647912285780268e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_8000
+Epoch 1 | Batch 8999/17681 | Training PPL: 15.603948997030276 | time 4300.604400396347
+Epoch 1 | Validation PPL: 15.269865913023224 | Learning rate: 1.6369851338911707e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_9000
+Epoch 1 | Batch 9999/17681 | Training PPL: 18.115192067559125 | time 4781.675496339798
+Epoch 1 | Validation PPL: 15.226738260124165 | Learning rate: 1.6083242988209936e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_10000
+Epoch 1 | Batch 10999/17681 | Training PPL: 16.80639489270954 | time 5262.843003988266
+Epoch 1 | Validation PPL: 15.181987635207923 | Learning rate: 1.5788471819936886e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_11000
+Epoch 1 | Batch 11999/17681 | Training PPL: 17.503248023886904 | time 5743.9830493927
+Epoch 1 | Validation PPL: 15.138703930109978 | Learning rate: 1.5485933373655338e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_12000
+Epoch 1 | Batch 12999/17681 | Training PPL: 17.95425114627938 | time 6225.131869316101
+Epoch 1 | Validation PPL: 15.110328594521752 | Learning rate: 1.5176033611473017e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_13000
+Epoch 1 | Batch 13999/17681 | Training PPL: 15.1938865244376 | time 6706.228743553162
+Epoch 1 | Validation PPL: 15.104749223664463 | Learning rate: 1.4859188373301132e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_14000
+Epoch 1 | Batch 14999/17681 | Training PPL: 18.701342345931362 | time 7187.382168531418
+Epoch 1 | Validation PPL: 15.056885341803008 | Learning rate: 1.4535822818858363e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_15000
+Epoch 1 | Batch 15999/17681 | Training PPL: 20.68704947884498 | time 7668.454959392548
+Epoch 1 | Validation PPL: 15.023597696217863 | Learning rate: 1.4206370857169039e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_16000
+Epoch 1 | Batch 16999/17681 | Training PPL: 18.1369772270774 | time 8149.403588294983
+Epoch 1 | Validation PPL: 14.99310011814054 | Learning rate: 1.3871274564321027e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1_17000
+End of epoch 1 | Validation PPL: 14.977187150583731 | Learning rate: 1.3640414195891927e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.1
+Epoch 2 | Batch 999/17681 | Training PPL: 19.7114088113949 | time 452.1937391757965
+Epoch 2 | Validation PPL: 14.951631054423533 | Learning rate: 1.329685126043237e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_1000
+Epoch 2 | Batch 1999/17681 | Training PPL: 15.559721962735908 | time 933.1520538330078
+Epoch 2 | Validation PPL: 14.942308584764561 | Learning rate: 1.2948864435371374e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_2000
+Epoch 2 | Batch 2999/17681 | Training PPL: 17.73042849515741 | time 1414.2052760124207
+Epoch 2 | Validation PPL: 14.894409013024374 | Learning rate: 1.2596920667857967e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_3000
+Epoch 2 | Batch 3999/17681 | Training PPL: 16.10140962015355 | time 1895.2813556194305
+Epoch 2 | Validation PPL: 14.879764362869986 | Learning rate: 1.2241492214676088e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_4000
+Epoch 2 | Batch 4999/17681 | Training PPL: 16.55417737324595 | time 2376.2976365089417
+Epoch 2 | Validation PPL: 14.851392809339206 | Learning rate: 1.1883056008545445e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_5000
+Epoch 2 | Batch 5999/17681 | Training PPL: 18.005194254271764 | time 2857.3072221279144
+Epoch 2 | Validation PPL: 14.829275454114928 | Learning rate: 1.1522093018147912e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_6000
+Epoch 2 | Batch 6999/17681 | Training PPL: 18.47010411065168 | time 3338.405719280243
+Epoch 2 | Validation PPL: 14.816655289685833 | Learning rate: 1.1159087602738303e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_7000
+Epoch 2 | Batch 7999/17681 | Training PPL: 14.596629746201087 | time 3819.54630112648
+Epoch 2 | Validation PPL: 14.793087111477895 | Learning rate: 1.0794526862205459e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_8000
+Epoch 2 | Batch 8999/17681 | Training PPL: 15.034881349723847 | time 4300.873250007629
+Epoch 2 | Validation PPL: 14.773342344147226 | Learning rate: 1.042889998345584e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_9000
+Epoch 2 | Batch 9999/17681 | Training PPL: 17.373414399162137 | time 4782.121561527252
+Epoch 2 | Validation PPL: 14.752800849792095 | Learning rate: 1.0062697583996615e-06
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_10000
+Epoch 2 | Batch 10999/17681 | Training PPL: 16.332120239883363 | time 5263.387408733368
+Epoch 2 | Validation PPL: 14.744945200425919 | Learning rate: 9.696411053599123e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_11000
+Epoch 2 | Batch 11999/17681 | Training PPL: 16.957361840746017 | time 5744.5823476314545
+Epoch 2 | Validation PPL: 14.722838942650473 | Learning rate: 9.330531894926042e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_12000
+Epoch 2 | Batch 12999/17681 | Training PPL: 17.38395521184281 | time 6225.791744470596
+Epoch 2 | Validation PPL: 14.71543779524531 | Learning rate: 8.965551064007103e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_13000
+Epoch 2 | Batch 13999/17681 | Training PPL: 14.770542429271652 | time 6706.95813369751
+Epoch 2 | Validation PPL: 14.69651845915771 | Learning rate: 8.601958311448294e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_14000
+Epoch 2 | Batch 14999/17681 | Training PPL: 18.308144403395055 | time 7188.075805425644
+Epoch 2 | Validation PPL: 14.683258591923133 | Learning rate: 8.24024152525854e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_15000
+Epoch 2 | Batch 15999/17681 | Training PPL: 20.000520436875508 | time 7669.170867681503
+Epoch 2 | Validation PPL: 14.667758404858922 | Learning rate: 7.880886076175766e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_16000
+Epoch 2 | Batch 16999/17681 | Training PPL: 17.840427751351832 | time 8150.245705842972
+Epoch 2 | Validation PPL: 14.657543536217284 | Learning rate: 7.524374166370724e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2_17000
+End of epoch 2 | Validation PPL: 14.660122800583999 | Learning rate: 7.283814579689194e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.2
+Epoch 3 | Batch 999/17681 | Training PPL: 19.135618424495775 | time 452.2851095199585
+Epoch 3 | Validation PPL: 14.644503883417089 | Learning rate: 6.933154511167366e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_1000
+Epoch 3 | Batch 1999/17681 | Training PPL: 15.100334732885175 | time 933.4112586975098
+Epoch 3 | Validation PPL: 14.627035751634276 | Learning rate: 6.586609698323012e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_2000
+Epoch 3 | Batch 2999/17681 | Training PPL: 17.364978898807713 | time 1414.4970688819885
+Epoch 3 | Validation PPL: 14.623747543563141 | Learning rate: 6.244645153336799e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_3000
+Epoch 3 | Batch 3999/17681 | Training PPL: 15.652816717198073 | time 1895.5488715171814
+Epoch 3 | Validation PPL: 14.62889463106612 | Learning rate: 5.907719742343453e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_4000
+Epoch 3 | Batch 4999/17681 | Training PPL: 16.15291740279246 | time 2376.7135303020477
+Epoch 3 | Validation PPL: 14.610198028286653 | Learning rate: 5.576285569700863e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_5000
+Epoch 3 | Batch 5999/17681 | Training PPL: 17.754552976615493 | time 2858.026598215103
+Epoch 3 | Validation PPL: 14.594555749356072 | Learning rate: 5.250787371332513e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_6000
+Epoch 3 | Batch 6999/17681 | Training PPL: 18.05179239960124 | time 3339.456018447876
+Epoch 3 | Validation PPL: 14.590704325768794 | Learning rate: 4.93166191795729e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_7000
+Epoch 3 | Batch 7999/17681 | Training PPL: 14.455122928084723 | time 3820.9864525794983
+Epoch 3 | Validation PPL: 14.58187459196668 | Learning rate: 4.619337429007367e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_8000
+Epoch 3 | Batch 8999/17681 | Training PPL: 14.957852831460682 | time 4302.649435520172
+Epoch 3 | Validation PPL: 14.593174408272553 | Learning rate: 4.314232998020738e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_9000
+Epoch 3 | Batch 9999/17681 | Training PPL: 16.948142378682892 | time 4784.483860731125
+Epoch 3 | Validation PPL: 14.578916314148003 | Learning rate: 4.016758030279276e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_10000
+Epoch 3 | Batch 10999/17681 | Training PPL: 16.274409991788325 | time 5266.289957284927
+Epoch 3 | Validation PPL: 14.5627971276775 | Learning rate: 3.727311693447077e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_11000
+Epoch 3 | Batch 11999/17681 | Training PPL: 16.537762784353173 | time 5748.339335441589
+Epoch 3 | Validation PPL: 14.56319989004926 | Learning rate: 3.446282381946126e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_12000
+Epoch 3 | Batch 12999/17681 | Training PPL: 17.17658477052768 | time 6230.435942649841
+Epoch 3 | Validation PPL: 14.55863821605538 | Learning rate: 3.1740471957881196e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_13000
+Epoch 3 | Batch 13999/17681 | Training PPL: 14.491507165728594 | time 6712.125023603439
+Epoch 3 | Validation PPL: 14.545665743709659 | Learning rate: 2.9109714345616765e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_14000
+Epoch 3 | Batch 14999/17681 | Training PPL: 17.98845164379756 | time 7193.383801460266
+Epoch 3 | Validation PPL: 14.54396307650499 | Learning rate: 2.6574081072540264e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_15000
+Epoch 3 | Batch 15999/17681 | Training PPL: 19.89165738501083 | time 7674.80145907402
+Epoch 3 | Validation PPL: 14.55828764424278 | Learning rate: 2.413697458564844e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_16000
+Epoch 3 | Batch 16999/17681 | Training PPL: 17.645970882607813 | time 8156.375529527664
+Epoch 3 | Validation PPL: 14.534880929762753 | Learning rate: 2.1801665123478964e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3_17000
+End of epoch 3 | Validation PPL: 14.532344488799916 | Learning rate: 2.0273405863131477e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.3
+Epoch 4 | Batch 999/17681 | Training PPL: 19.032601978887392 | time 452.9597408771515
+Epoch 4 | Validation PPL: 14.528045331716385 | Learning rate: 1.8116098176074411e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_1000
+Epoch 4 | Batch 1999/17681 | Training PPL: 14.949086041954807 | time 934.8299427032471
+Epoch 4 | Validation PPL: 14.53877654519815 | Learning rate: 1.6068666644533236e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_2000
+Epoch 4 | Batch 2999/17681 | Training PPL: 17.142280677292984 | time 1416.8386771678925
+Epoch 4 | Validation PPL: 14.538190749858542 | Learning rate: 1.4133858620555928e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_3000
+Epoch 4 | Batch 3999/17681 | Training PPL: 15.55928793075381 | time 1898.9291071891785
+Epoch 4 | Validation PPL: 14.52595337376725 | Learning rate: 1.2314270332004085e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_4000
+Epoch 4 | Batch 4999/17681 | Training PPL: 16.065127123511598 | time 2381.0358078479767
+Epoch 4 | Validation PPL: 14.52707897595404 | Learning rate: 1.0612343398797108e-07
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_5000
+Epoch 4 | Batch 5999/17681 | Training PPL: 17.60065110425557 | time 2862.9028170108795
+Epoch 4 | Validation PPL: 14.525257275756775 | Learning rate: 9.030361556617116e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_6000
+Epoch 4 | Batch 6999/17681 | Training PPL: 17.996430545633892 | time 3344.7400135993958
+Epoch 4 | Validation PPL: 14.523643564902983 | Learning rate: 7.570447592471641e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_7000
+Epoch 4 | Batch 7999/17681 | Training PPL: 14.476147273494968 | time 3826.6626596450806
+Epoch 4 | Validation PPL: 14.518775815537829 | Learning rate: 6.23456049622546e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_8000
+Epoch 4 | Batch 8999/17681 | Training PPL: 14.68202637552889 | time 4308.702153921127
+Epoch 4 | Validation PPL: 14.521908852571228 | Learning rate: 5.02449283192441e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_9000
+Epoch 4 | Batch 9999/17681 | Training PPL: 16.930767975257993 | time 4790.968869447708
+Epoch 4 | Validation PPL: 14.516245645975173 | Learning rate: 3.9418683324378585e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_10000
+Epoch 4 | Batch 10999/17681 | Training PPL: 15.982263987680405 | time 5273.2387363910675
+Epoch 4 | Validation PPL: 14.517273582339254 | Learning rate: 2.9881397206481306e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_11000
+Epoch 4 | Batch 11999/17681 | Training PPL: 16.45203426216693 | time 5754.042004108429
+Epoch 4 | Validation PPL: 14.515681523283066 | Learning rate: 2.1645867601098765e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_12000
+Epoch 4 | Batch 12999/17681 | Training PPL: 17.21813998037135 | time 6234.442554235458
+Epoch 4 | Validation PPL: 14.51260865093304 | Learning rate: 1.4723145377956825e-08
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_13000
+Epoch 4 | Batch 13999/17681 | Training PPL: 14.452483249812628 | time 6714.6879115104675
+Epoch 4 | Validation PPL: 14.512234967586455 | Learning rate: 9.122519812317486e-09
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_14000
+Epoch 4 | Batch 14999/17681 | Training PPL: 17.952436252146292 | time 7195.028605222702
+Epoch 4 | Validation PPL: 14.512439108222235 | Learning rate: 4.851506120138072e-09
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_15000
+Epoch 4 | Batch 15999/17681 | Training PPL: 19.78796263019712 | time 7675.536833763123
+Epoch 4 | Validation PPL: 14.51336296700208 | Learning rate: 1.9158353737565023e-09
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_16000
+Epoch 4 | Batch 16999/17681 | Training PPL: 17.60752602240653 | time 8156.945161342621
+Epoch 4 | Validation PPL: 14.51348061616173 | Learning rate: 3.1944681163453833e-10
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4_17000
+End of epoch 4 | Validation PPL: 14.51284393797661 | Learning rate: 6.710015065802821e-14
+Save checkpoint to exp/finetune_gpt2_lr2e-6/checkpoint.4
