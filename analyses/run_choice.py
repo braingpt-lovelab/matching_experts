@@ -138,7 +138,8 @@ if __name__ == "__main__":
         # "gpt2",
         # "gpt2_init",
         # "gpt2_scratch"
-        "finetune_gpt2_lr2e-6"
+        # "finetune_gpt2_lr2e-6"
+        "gpt2-large_scratch_neuro_tokenizer"
     ]
 
     for llm in llms:

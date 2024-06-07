@@ -42,6 +42,12 @@ model_list = {
             "alpha": 0.9,
             "hatch": "",
         },
+        "gpt2-large_scratch_neuro_tokenizer": {
+            "llm": "Large + Scratch + Neuro tokenizer",
+            "color": '#FA9284',
+            "alpha": 0.9,
+            "hatch": "",
+        },
     },
 }
 
@@ -62,7 +68,8 @@ def load_model_and_tokenizer(model_fpath, tokenizer_only=False):
             "gpt2_scratch",
             "finetune_gpt2",
             "finetune_gpt2_lr2e-6",
-            "gpt2_scratch_neuro_tokenizer"
+            "gpt2_scratch_neuro_tokenizer",
+            "gpt2-large_scratch_neuro_tokenizer",
         ]:
         model_fpath = f"/home/ken/projects/matching_experts/model_training/exp/{model_fpath}/checkpoint.4"
         print("Loading GPT2 model from", model_fpath)
