@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Define the JSON file and expdir
-args_json="configs/finetune_gpt2_lr2e-6.json"
+args_json="configs/gpt2-large_scratch_neuro_tokenizer.json"
 
 expdir=$(python3 -c "import json; import sys; d = json.load(open('$args_json')); sys.stdout.write(d['outputdir'])")
 mkdir -p $expdir
