@@ -1,0 +1,23 @@
+{
+    "model_path": "gpt2-medium",
+    "data_path": "BrainGPT/train_valid_split_pmc_neuroscience_2002-2022_filtered_subset",
+    "cache_dir": "cache",
+    "batch_size": 8,
+    "chunk_size": 1024,
+    "eval_batch_size": 16,
+    "learning_rate": 2e-5,
+    "gradient_accumulation_steps": 8,
+    "num_train_epochs": 5,
+    "num_warmup_steps": 0.03,
+    "weight_decay": 0.001,
+    "lr_scheduler_type": "cosine",
+    "outputdir": "exp/gpt2-medium_scratch_neuro_tokenizer",
+    "logfile": "exp/gpt2-medium_scratch_neuro_tokenizer/log.txt",
+    "log_interval": 1000,
+    "save_interval": 10000,
+    "master_port": "12355",
+    "train_mode": "scratch",
+    "custom_tokenizer": "cache/gpt2_neuro_tokenizer",
+    "wandb_project": "brainlessgpt",
+    "wandb_entity": "kenotron"
+}
