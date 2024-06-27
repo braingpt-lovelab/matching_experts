@@ -85,10 +85,10 @@ def main(llm, abstracts_fpath):
             original_abstract, incorrect_abstract, prompt_template, 
         )
 
-        print(
-            f"-"*70 + "\n",
-            f"*** Abstract index: {abstract_index} ***",
-        )
+        # print(
+        #     f"-"*70 + "\n",
+        #     f"*** Abstract index: {abstract_index} ***",
+        # )
 
         # Forward each prompt to get nll and convert to ppl
         ppl = forward_pass(model, tokenizer, choices)
@@ -133,15 +133,10 @@ if __name__ == "__main__":
         use_human_abstract = False
 
     llms = [
-        # "gpt2_scratch_neuro_tokenizer",
-        # "finetune_gpt2",
-        # "gpt2",
-        # "gpt2_init",
-        # "gpt2_scratch"
-        # "finetune_gpt2_lr2e-6"
-        # "gpt2-large_scratch_neuro_tokenizer"
-        # "gpt2-large",
-        "gpt2-medium"
+        "gpt2_scratch_neuro_tokenizer",
+        "gpt2_scratch_neuro_tokenizer_spt",
+        "gpt2-medium_scratch_neuro_tokenizer",
+        "gpt2-medium_scratch_neuro_tokenizer_spt",
     ]
 
     for llm in llms:
