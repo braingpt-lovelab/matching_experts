@@ -40,6 +40,9 @@ def tokenize(element, tokenizer, args):
         print(f"Adjust max_length to {args.chunk_size - 1} to add special tokens")
         special_token_id = tokenizer.convert_tokens_to_ids(args.spt)
         max_length = args.chunk_size - 1
+    else:
+        print("Not using special token")
+        max_length = args.chunk_size
 
     outputs = tokenizer(
         element["text"],
