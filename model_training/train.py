@@ -36,13 +36,26 @@ def logging(s, logfile, logging_=True, log_=True):
 
 
 def tokenize(element, tokenizer, args):
+    if args.spt != "":
+        print(f"Adjust max_length to {args.chunk_size - 1} to add special tokens")
+        special_token_id = tokenizer.convert_tokens_to_ids(args.spt)
+        max_length = args.chunk_size - 1
+
     outputs = tokenizer(
         element["text"],
         truncation=True,
-        max_length=args.chunk_size,
+        max_length=max_length,
         return_overflowing_tokens=True,
         return_length=True,
     )
+
+    # Add special token id to the end of every chunk
+    if args.spt != "":
+        print(f"Add special token: {args.spt} to separate documents")
+        for i in range(len(outputs["input_ids"])):
+            outputs["input_ids"][i].append(special_token_id)
+            outputs["attention_mask"][i].append(1)
+
     output_ids = list(itertools.chain(*outputs["input_ids"]))
     output_mask = list(itertools.chain(*outputs["attention_mask"]))
     output_ids = [output_ids[x:x+args.chunk_size] for x in range(0, len(output_ids), args.chunk_size)]
@@ -380,6 +393,12 @@ if __name__ == "__main__":
         type=str,
         default="kenotron",
         help="Wandb entity name",
+    )
+    parser.add_argument(
+        "--spt",
+        type=str,
+        default="",
+        help="special token"
     )
     args = parser.parse_args()
     world_size = torch.cuda.device_count()
