@@ -42,12 +42,6 @@ model_list = {
             "alpha": 0.9,
             "hatch": "",
         },
-        "gpt2-large_scratch_neuro_tokenizer": {
-            "llm": "Large + Scratch + Neuro tokenizer",
-            "color": '#FA9284',
-            "alpha": 0.9,
-            "hatch": "",
-        },
     },
 }
 

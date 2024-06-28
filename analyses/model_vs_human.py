@@ -140,13 +140,13 @@ def plot(use_human_abstract):
     # plot as horizontal line
     human_acc, human_sem = get_human_accuracies(use_human_abstract)
     ax.axhline(y=human_acc, color='b', linestyle='--', lw=3)
-    # ax.fill_between(
-    #     [all_llm_xticks[0], all_llm_xticks[-1]+1],
-    #     human_acc - human_sem,
-    #     human_acc + human_sem,
-    #     color='b',
-    #     alpha=0.3
-    # )
+    ax.fill_between(
+        [all_llm_xticks[0], all_llm_xticks[-1]+1],
+        human_acc - human_sem,
+        human_acc + human_sem,
+        color='b',
+        alpha=0.3
+    )
 
     print('human_acc:', human_acc)
     human_acc_top_expertise, _ = get_human_accuracies_top_expertise(use_human_abstract)
@@ -157,7 +157,7 @@ def plot(use_human_abstract):
     ax.text(
         (all_llm_xticks[-1]),
         human_acc+0.01,
-        "Human experts",
+        "Human\nexperts",
         fontsize=16,
         color='k'
     )
@@ -174,6 +174,7 @@ def plot(use_human_abstract):
     plt.tight_layout()
     if use_human_abstract:
         plt.savefig(f"{base_fname}_human_abstract.pdf")
+        plt.savefig(f"{base_fname}_human_abstract.svg")
     else:
         plt.savefig(f"{base_fname}_llm_abstract.pdf")
 
