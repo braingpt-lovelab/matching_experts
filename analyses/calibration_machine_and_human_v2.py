@@ -224,7 +224,7 @@ def plot_calibration_human_and_machines():
 
     fig, axes = plt.subplots(
         n_rows, n_cols, 
-        figsize=(12, 6), 
+        figsize=(12, 4), 
         sharey=True
     )
     axes_flat = axes.flatten()
