@@ -34,6 +34,14 @@ model_list = {
             "alpha": 0.9,
             "hatch": "",
         },
+    },
+    "gpt2_iso": {  # For iso experiment plotting only.
+        "gpt2_scratch_neuro_tokenizer": {
+            "llm": "GPT2-Neuro (124M)",
+            "color": '#FA9284',
+            "alpha": 0.9,
+            "hatch": "",
+        },
         "gpt2-medium_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (355M)",
             "color": '#FA9284',
