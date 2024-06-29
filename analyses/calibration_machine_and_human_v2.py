@@ -45,18 +45,22 @@ def _plot_calibration_machine(PPL_A_and_B, labels, llm, llm_family, ax):
     hatch = llms[llm_family][llm]["hatch"]
     llm = llms[llm_family][llm]["llm"]
 
-    P_A_and_B = F.softmax(torch.tensor(PPL_A_and_B), dim=1)
-    P_A_and_B_max = P_A_and_B.max(dim=1).values.numpy()
+    # Use abs diff between A/B PPL as confidence.
+    # Convert confidences to ranks for linear binning.
+    # From low confidence (small rank) to high confidence (large rank).
+    PPL_A_and_B_diff = np.abs(PPL_A_and_B[:, 0] - PPL_A_and_B[:, 1])
+    confidences = stats.rankdata(PPL_A_and_B_diff, method='ordinal') - 1.
 
-    bin_boundaries = np.linspace(0.5, 1, n_bins + 1)
+    # Bin the confidences and compute the accuracy per bin
+    bin_boundaries = np.linspace(0, len(confidences), n_bins + 1)
     bin_lowers = bin_boundaries[:-1]
     bin_uppers = bin_boundaries[1:]
     bin_heights = []  # acc in each bin
     overall_acc = []  # sanity check
     for bin_lower, bin_upper in zip(bin_lowers, bin_uppers):
         in_bin = np.logical_and(
-            P_A_and_B_max >= bin_lower.item(), 
-            P_A_and_B_max < bin_upper.item()
+            confidences >= bin_lower.item(), 
+            confidences < bin_upper.item()
         )
         prop_in_bin = in_bin.astype(float).mean()
         assert prop_in_bin == (np.sum(in_bin) / len(in_bin))
@@ -81,7 +85,7 @@ def _plot_calibration_machine(PPL_A_and_B, labels, llm, llm_family, ax):
                 width=width, 
                 edgecolor='k',
                 color=color, 
-                alpha=alpha,
+                alpha=.5,
                 hatch=hatch,
             )
             # Apply the hatch offset to each bar individually
@@ -95,12 +99,14 @@ def _plot_calibration_machine(PPL_A_and_B, labels, llm, llm_family, ax):
                 width=width, 
                 edgecolor='k',
                 color=color, 
-                alpha=alpha,
+                alpha=.5,
             )
 
     ax.set_ylabel("Accuracy")
-    ax.set_xlabel("Top answer proba.")
-    ax.set_xticks([0.5, 1])
+    ax.set_xlabel("Confidence")
+    # Set xticks at both ends "low" and "high"
+    ax.set_xticks([0, len(confidences)])
+    ax.set_xticklabels(["low", "high"])
     ax.set_ylim(0, 1)
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
@@ -110,26 +116,18 @@ def _plot_calibration_machine(PPL_A_and_B, labels, llm, llm_family, ax):
         ax.set_title(f"{llm}")
 
     # Plot regression line
-    x = np.array(bin_midpoints)
-    y = np.array(bin_heights)
-
-    # non_empty_bins = np.where(np.array(bin_heights) > 0)[0]
-    # x = x[non_empty_bins]
-    # y = y[non_empty_bins]
-
-    # slope, intercept, rvalue, pvalue, stderr = stats.linregress(x, y)
-
-    # print(y)
-    # print(slope)
+    x = bin_midpoints
+    y = bin_heights
+    slope, intercept, rvalue, pvalue, stderr = stats.linregress(x, y)
     
-    # ax.plot(
-    #     x, 
-    #     intercept + slope * x, 
-    #     color='k', 
-    #     alpha=1, 
-    #     linestyle='-',
-    #     linewidth=plt.rcParams['lines.linewidth'] * 2,
-    # )
+    ax.plot(
+        x, 
+        intercept + slope * x, 
+        color='k', 
+        alpha=1, 
+        linestyle='-',
+        linewidth=plt.rcParams['lines.linewidth'] * 2,
+    )
     return ax
 
 
@@ -197,7 +195,9 @@ def _plot_calibration_human(human_results_dir, ax):
     ax.spines['right'].set_visible(False)
     ax.set_title(f"Human experts")
     ax.set_xlabel("Confidence")
-    ax.set_xticks([])
+    # Set xticks at both ends "low" and "high"
+    ax.set_xticks([0, len(confidences)])
+    ax.set_xticklabels(["low", "high"])
 
     # Add a regression line (fitting rank and accuracy in bin)
     x = np.array(bin_midpoints)
@@ -216,44 +216,41 @@ def _plot_calibration_human(human_results_dir, ax):
 
 def plot_calibration_human_and_machines():
     """
-    4*4 figure, with the first subplot for human experts, and the rest for LLMs.
+    1*4 figure, with the first subplot for human experts, and the rest for LLMs.
     """
-    total_n_llms = 0
-    for llm_family in llms:
-        total_n_llms += len(llms[llm_family])
+    total_n_llms = sum(len(llms[llm_family]) for llm_family in llms)
     n_cols = 4
-    n_rows = (total_n_llms + 1) // n_cols  # +1 for the human experts subplot
-    if (total_n_llms + 1) % n_cols > 0:  # Check if an extra row is needed
-        n_rows += 1
+    n_rows = (total_n_llms + 1 + n_cols - 1) // n_cols  # +1 for human experts, rounded up
+
     fig, axes = plt.subplots(
         n_rows, n_cols, 
-        figsize=(12, 15), 
+        figsize=(12, 6), 
         sharey=True
     )
+    axes_flat = axes.flatten()
 
-    # Plot human experts first at position (0, 0)
-    ax = axes[0][0]
-    _plot_calibration_human(human_results_dir, ax)
+    # Plot human experts first
+    _plot_calibration_human(human_results_dir, axes_flat[0])
 
-    # Adjust the loop to start filling from the second subplot
-    i = 1  # Start from the second subplot
-    for llm_family in llms:
-        for llm in llms[llm_family]:
+    # Plot LLMs
+    for i, (llm_family, llm_list) in enumerate(llms.items(), start=1):
+        for llm in llm_list:
             results_dir = f"{model_results_dir}/{llm.replace('/', '--')}/{type_of_abstract}"
             PPL_A_and_B = np.load(f"{results_dir}/{PPL_fname}.npy")
             labels = np.load(f"{results_dir}/{label_fname}.npy")
 
-            # Calculate subplot position
-            ax_row = i // n_cols
-            ax_col = i % n_cols
-            ax = axes[ax_row][ax_col]
+            ax = axes_flat[i]
             _plot_calibration_machine(PPL_A_and_B, labels, llm, llm_family, ax)
             
-            if ax_row != n_rows - 1:
+            if i < len(axes_flat) - n_cols:
                 ax.set_xticks([])
             
             i += 1
-                
+
+    # Hide any unused subplots
+    for j in range(i, len(axes_flat)):
+        axes_flat[j].set_visible(False)
+
     plt.tight_layout()
     plt.savefig(f"figs/calibration_{type_of_abstract}_v2.pdf")
     plt.close()
@@ -369,7 +366,7 @@ def logistic_regression_calibration(n_folds, pct_train):
 
 
 def main():
-    # plot_calibration_human_and_machines()
+    plot_calibration_human_and_machines()
     logistic_regression_calibration(n_folds=5, pct_train=0.8)
 
 
@@ -393,4 +390,5 @@ if __name__ == "__main__":
     model_results_dir = "model_results"
     human_results_dir = "human_results"
     llms = model_utils.model_list
+    del llms["gpt2"]
     main()
