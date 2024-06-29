@@ -30,7 +30,7 @@ model_list = {
         },
         "gpt2_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (124M)",
-            "color": '#FA9284',
+            "color": '#763C4B',
             "alpha": 0.9,
             "hatch": "",
         },
@@ -38,21 +38,21 @@ model_list = {
     "gpt2_iso": {  # For iso experiment plotting only.
         "gpt2_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (124M)",
-            "color": '#FA9284',
+            "color": '#763C4B',
             "alpha": 0.9,
             "hatch": "",
         },
         "gpt2-medium_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (355M)",
-            "color": '#FA9284',
+            "color": '#763C4B',
             "alpha": 0.9,
-            "hatch": "",
+            "hatch": ".",
         },
         "gpt2-large_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (774M)",
-            "color": '#FA9284',
+            "color": '#763C4B',
             "alpha": 0.9,
-            "hatch": "",
+            "hatch": "+",
         },
     },
 }
