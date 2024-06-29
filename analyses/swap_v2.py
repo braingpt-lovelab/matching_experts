@@ -13,7 +13,7 @@ from iso_overall_accuracy_model_vs_human \
     import get_llm_accuracies as get_llm_accuracies_iso
 
 
-def get_llm_accuracies(model_results_dir, use_human_abstract=True):
+def get_llm_accuracies(model_list, model_results_dir, use_human_abstract=True):
     llms = copy.deepcopy(model_list)
     for llm_family in llms.keys():        
         for llm in llms[llm_family]:
@@ -65,9 +65,9 @@ def plot(use_human_abstract):
     1) Plot two bars showing average original and swapped accuracy of LLMs.
     2) Plot human experts as a horizontal line.
     """
-    llms_original = get_llm_accuracies_original(model_results_dir, use_human_abstract)
-    llms_iso = get_llm_accuracies_iso(model_results_dir, use_human_abstract)
-    llms = get_llm_accuracies(model_results_dir, use_human_abstract)
+    llms_original = get_llm_accuracies_original(model_list, model_results_dir, use_human_abstract)
+    llms_iso = get_llm_accuracies_iso(model_list, model_results_dir, use_human_abstract)
+    llms = get_llm_accuracies(model_list, model_results_dir, use_human_abstract)
     
     fig, ax = plt.subplots(figsize=(6, 6))
 
@@ -189,4 +189,5 @@ if __name__ == "__main__":
     figs_dir = "figs"
     base_fname = f"swap_seed{args.seed}_overall_accuracy_model_vs_human"
     model_list = model_utils.model_list
+    del model_list["gpt2"]
     plot(parser.parse_args().use_human_abstract)
