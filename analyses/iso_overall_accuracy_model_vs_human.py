@@ -10,9 +10,10 @@ from utils import general_utils
 from overall_accuracy_model_vs_human \
     import get_llm_accuracies as get_llm_accuracies_original
 
+plt.rcParams.update({'font.size': 16, 'font.weight': 'bold'})
 
 def get_llm_accuracies(model_results_dir, use_human_abstract=True, eval_isolated_sentences=True):
-    llms = copy.deepcopy(model_list)
+    llms = copy.deepcopy(model_utils.model_list)
     for llm_family in llms.keys():        
         for llm in llms[llm_family]:
             if use_human_abstract:
@@ -68,7 +69,7 @@ def plot(use_human_abstract):
     llms_original = get_llm_accuracies_original(model_results_dir, use_human_abstract)
     llms = get_llm_accuracies(model_results_dir, use_human_abstract)
     
-    fig, ax = plt.subplots(figsize=(6, 6))
+    fig, ax = plt.subplots(figsize=(6, 4))
 
     all_llm_accuracies_original = []
     all_llm_accuracies = []
@@ -116,7 +117,7 @@ def plot(use_human_abstract):
         [0, pair[0], 0, 0],
         color='purple',
         marker='*',
-        label="LLMs with context"
+        label="With context"
     )
 
     ax.scatter(
@@ -124,7 +125,7 @@ def plot(use_human_abstract):
         [0, 0, pair[1], 0],
         color='red',
         marker='o',
-        label="LLMs without context"
+        label="Without context"
     )
     
     # Plot human expert
@@ -141,7 +142,17 @@ def plot(use_human_abstract):
         color='k'
     )
 
-    ax.set_ylim([0.5, 1])
+    # Add annotations (all_llm_names) to each scatter plot 
+    for i, name in enumerate(all_llm_names):
+        ax.text(
+            x[1],
+            all_llm_accuracies_original[i]+0.01,
+            name,
+            fontsize=8,
+            color='purple'
+        )
+
+    ax.set_ylim([0.5, 0.8])
     ax.set_xticks([])
     ax.set_ylabel("Accuracy")
     ax.spines['right'].set_visible(False)
@@ -151,6 +162,7 @@ def plot(use_human_abstract):
     base_fname = "iso_overall_accuracy_model_vs_human"
     if use_human_abstract:
         plt.savefig(f"figs/{base_fname}_human_abstract.pdf")
+        plt.savefig(f"figs/{base_fname}_human_abstract.svg")
     else:
         plt.savefig(f"figs/{base_fname}_llm_abstract.pdf")
 
@@ -162,5 +174,4 @@ if __name__ == "__main__":
     model_results_dir = "model_results"
     human_results_dir = "human_results"
     base_fname = "figs/iso_overall_accuracy_model_vs_human"
-    model_list = model_utils.model_list
     plot(parser.parse_args().use_human_abstract)

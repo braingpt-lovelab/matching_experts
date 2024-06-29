@@ -29,19 +29,19 @@ model_list = {
         #     "hatch": "",
         # },
         "gpt2_scratch_neuro_tokenizer": {
-            "llm": "Scratch + Neuro tokenizer",
+            "llm": "GPT2-Neuro (124M)",
             "color": '#FA9284',
             "alpha": 0.9,
             "hatch": "",
         },
         "gpt2-medium_scratch_neuro_tokenizer": {
-            "llm": "Scratch + Neuro tokenizer",
+            "llm": "GPT2-Neuro (355M)",
             "color": '#FA9284',
             "alpha": 0.9,
             "hatch": "",
         },
         "gpt2-large_scratch_neuro_tokenizer": {
-            "llm": "Scratch + Neuro tokenizer",
+            "llm": "GPT2-Neuro (774M)",
             "color": '#FA9284',
             "alpha": 0.9,
             "hatch": "",

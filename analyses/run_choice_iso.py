@@ -163,7 +163,9 @@ if __name__ == "__main__":
     aggregate_within_sentence = True
     
     llms = [
-        "gpt2_scratch_neuro_tokenizer"
+        "gpt2_scratch_neuro_tokenizer",
+        "gpt2-medium_scratch_neuro_tokenizer",
+        "gpt2-large_scratch_neuro_tokenizer"
     ]
 
     for llm in llms:
