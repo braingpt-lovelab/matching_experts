@@ -10,9 +10,9 @@ from utils.general_utils import str2bool
 from utils.general_utils import scorer_acc, scorer_sem
 
 
-def get_llm_accuracies(model_results_dir, use_human_abstract=True):
-    for llm_family in llms.keys():
-        for llm in llms[llm_family]:
+def get_llm_accuracies(model_list, model_results_dir, use_human_abstract=True):
+    for llm_family in model_list.keys():
+        for llm in model_list[llm_family]:
             if use_human_abstract:
                 type_of_abstract = 'human_abstracts'
             else:
@@ -29,10 +29,10 @@ def get_llm_accuracies(model_results_dir, use_human_abstract=True):
 
             acc = scorer_acc(PPL_A_and_B, labels)
             sem = scorer_sem(PPL_A_and_B, labels)
-            llms[llm_family][llm]["acc"] = acc
-            llms[llm_family][llm]["sem"] = sem
+            model_list[llm_family][llm]["acc"] = acc
+            model_list[llm_family][llm]["sem"] = sem
             
-    return llms
+    return model_list
 
 
 def get_human_accuracies(use_human_abstract):
@@ -88,7 +88,7 @@ def get_human_accuracies_top_expertise(use_human_abstract, top_pct=0.2):
     return acc, sem
 
 
-def plot(use_human_abstract):
+def plot(model_list, use_human_abstract):
     """
     Plot LLMs vs human experts.
 
@@ -98,7 +98,7 @@ def plot(use_human_abstract):
 
     2) Plot human experts as a horizontal line
     """
-    llms = get_llm_accuracies(model_results_dir, use_human_abstract)
+    llms = get_llm_accuracies(model_list, model_results_dir, use_human_abstract)
 
     plt.rcParams.update({'font.size': 16, 'font.weight': 'bold'})
     fig, ax = plt.subplots(figsize=(8, 6))
@@ -185,8 +185,5 @@ if __name__ == "__main__":
     model_results_dir = "model_results"
     human_results_dir = "human_results"
     base_fname = "figs/overall_accuracy_model_vs_human"
-    llms = model_list
-    # Remove `gpt2-medium_scratch_neuro_tokenizer` and `gpt2-large_scratch_neuro_tokenizer`
-    llms["gpt2"].pop("gpt2-medium_scratch_neuro_tokenizer")
-    llms["gpt2"].pop("gpt2-large_scratch_neuro_tokenizer")
-    plot(parser.parse_args().use_human_abstract)
+    del model_list["gpt2_iso"]
+    plot(model_list, parser.parse_args().use_human_abstract)

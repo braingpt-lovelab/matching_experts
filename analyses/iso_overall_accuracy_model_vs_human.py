@@ -12,8 +12,8 @@ from overall_accuracy_model_vs_human \
 
 plt.rcParams.update({'font.size': 16, 'font.weight': 'bold'})
 
-def get_llm_accuracies(model_results_dir, use_human_abstract=True, eval_isolated_sentences=True):
-    llms = copy.deepcopy(model_utils.model_list)
+def get_llm_accuracies(model_list, model_results_dir, use_human_abstract=True, eval_isolated_sentences=True):
+    llms = copy.deepcopy(model_list)
     for llm_family in llms.keys():        
         for llm in llms[llm_family]:
             if use_human_abstract:
@@ -66,8 +66,8 @@ def plot(use_human_abstract):
     1) Plot two bars showing average original and isolated accuracy of LLMs.
     2) Plot human experts as a horizontal line.
     """
-    llms_original = get_llm_accuracies_original(model_results_dir, use_human_abstract)
-    llms = get_llm_accuracies(model_results_dir, use_human_abstract)
+    llms_original = get_llm_accuracies_original(model_list, model_results_dir, use_human_abstract)
+    llms = get_llm_accuracies(model_list, model_results_dir, use_human_abstract)
     
     fig, ax = plt.subplots(figsize=(6, 4))
 
@@ -174,4 +174,6 @@ if __name__ == "__main__":
     model_results_dir = "model_results"
     human_results_dir = "human_results"
     base_fname = "figs/iso_overall_accuracy_model_vs_human"
+    model_list = model_utils.model_list
+    del model_list["gpt2"]
     plot(parser.parse_args().use_human_abstract)
