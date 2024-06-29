@@ -4,30 +4,30 @@ import torch
 
 model_list = {
     "gpt2": {
-        # "gpt2_init": {
-        #     "llm": "Untrained",
-        #     "color": '#A5CAD2',
-        #     "alpha": 0.3,
-        #     "hatch": "",
-        # },
-        # "gpt2": {
-        #     "llm": "Pretrained",
-        #     "color": '#758EB7',
-        #     "alpha": 0.4,
-        #     "hatch": "",
-        # },
-        # "gpt2_scratch": {
-        #     "llm": "Scratch",
-        #     "color": '#E1C0D8',
-        #     "alpha": 0.6,
-        #     "hatch": "",
-        # },
-        # "finetune_gpt2": {
-        #     "llm": "Finetuned from pretrained",
-        #     "color": '#D2A9B0',
-        #     "alpha": 0.8,
-        #     "hatch": "",
-        # },
+        "gpt2_init": {
+            "llm": "GPT2-Untrained (124M)",
+            "color": '#A5CAD2',
+            "alpha": 0.3,
+            "hatch": "",
+        },
+        "gpt2": {
+            "llm": "GPT2-Pretrained (124M)",
+            "color": '#758EB7',
+            "alpha": 0.4,
+            "hatch": "",
+        },
+        "gpt2_scratch": {
+            "llm": "GPT2-Scratch (124M)",
+            "color": '#E1C0D8',
+            "alpha": 0.6,
+            "hatch": "",
+        },
+        "finetune_gpt2": {
+            "llm": "GPT2-Finetuned (124M)",
+            "color": '#D2A9B0',
+            "alpha": 0.8,
+            "hatch": "",
+        },
         "gpt2_scratch_neuro_tokenizer": {
             "llm": "GPT2-Neuro (124M)",
             "color": '#FA9284',

@@ -11,7 +11,6 @@ from utils.general_utils import scorer_acc, scorer_sem
 
 
 def get_llm_accuracies(model_results_dir, use_human_abstract=True):
-    llms = model_list
     for llm_family in llms.keys():
         for llm in llms[llm_family]:
             if use_human_abstract:
@@ -186,4 +185,8 @@ if __name__ == "__main__":
     model_results_dir = "model_results"
     human_results_dir = "human_results"
     base_fname = "figs/overall_accuracy_model_vs_human"
+    llms = model_list
+    # Remove `gpt2-medium_scratch_neuro_tokenizer` and `gpt2-large_scratch_neuro_tokenizer`
+    llms["gpt2"].pop("gpt2-medium_scratch_neuro_tokenizer")
+    llms["gpt2"].pop("gpt2-large_scratch_neuro_tokenizer")
     plot(parser.parse_args().use_human_abstract)
